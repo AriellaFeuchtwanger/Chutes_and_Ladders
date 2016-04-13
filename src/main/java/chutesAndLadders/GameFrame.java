@@ -15,8 +15,8 @@ public class GameFrame extends JFrame {
 		setTitle("CHUTES AND LADDERS");
 		setSize(800, 600);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		add(this.gameMenu = gameMenu);
 		this.gameMenu.setFrame(this);
 
@@ -29,9 +29,6 @@ public class GameFrame extends JFrame {
 
 	}
 
-	//	public GameMenu getMenu(){
-	//		return gameMenu;
-	//	}
 
 
 }

@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -34,14 +35,17 @@ public class ChutesAndLadders extends JPanel {
 	private Timer timer;
 	private int number;
 	private JLabel playersImg;
-
 	private GameMenu gameMenu;
+	private VideoPlayer videoPlayer;
+
 
 	@Inject
 	public ChutesAndLadders() {
 
 		BorderLayout bLayout = new BorderLayout();
 		setLayout(bLayout);
+
+		videoPlayer = new VideoPlayer();
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(4, 0, 7, 7));
@@ -57,14 +61,16 @@ public class ChutesAndLadders extends JPanel {
 		add(board, BorderLayout.CENTER);
 
 		JPanel playerPanel = new JPanel(new GridLayout(2, 1));
+
 		playerPanel.setOpaque(false);
+
 		playersTurn = new JLabel("", JLabel.CENTER);
 		playersTurn.setFont(font);
 		playersTurn.setForeground(Color.WHITE);
 		playersTurn.setVerticalAlignment(JLabel.BOTTOM);
 		playerPanel.add(playersTurn);
 
-		JLabel turn = new JLabel("turn", JLabel.CENTER);
+		JLabel turn = new JLabel("TURN", JLabel.CENTER);
 		turn.setFont(font);
 		turn.setForeground(Color.WHITE);
 		turn.setVerticalAlignment(JLabel.TOP);
@@ -150,9 +156,10 @@ public class ChutesAndLadders extends JPanel {
 
 		current = players[0];
 
-		playersTurn.setText(current.getName() + "'s");
+		playersTurn.setText(current.getName() + "'S");
 
 		playersImg.setIcon(new ImageIcon(current.getImage()));
+
 
 		logic = new GameLogic(players, board);
 	}
@@ -178,22 +185,18 @@ public class ChutesAndLadders extends JPanel {
 		}
 	}
 
-	private void checkBoard() {
+	private void checkBoard() throws IOException {
 		boolean found = false;
 		int row = current.getRow();
 		int col = current.getCol();
 
 		if (logic.checkSnake(current.getPosition())) {
-			JOptionPane.showMessageDialog(this,
-					"OH NO! YOU HIT A SNAKE - GOING DOWN...!",
-					"chutes and ladders", JOptionPane.PLAIN_MESSAGE,
-					new ImageIcon("snake.gif"));
+			videoPlayer.setVisible(true);
+			videoPlayer.playVideo(1);
 			found = true;
 		} else if (logic.checkLadder(current.getPosition())) {
-			JOptionPane.showMessageDialog(this,
-					"YAY! YOU HIT A LADDER - GOING UP...!",
-					"chutes and ladders", JOptionPane.PLAIN_MESSAGE,
-					new ImageIcon("ladder.jpeg"));
+			videoPlayer.setVisible(true);
+			videoPlayer.playVideo(0);
 			found = true;
 		}
 
@@ -253,7 +256,12 @@ public class ChutesAndLadders extends JPanel {
 				if (count == number) {
 					pieceTimer.stop();
 					pieceTimer = null;
-					nextTurn();
+					try {
+						nextTurn();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 
@@ -266,7 +274,7 @@ public class ChutesAndLadders extends JPanel {
 
 	}
 
-	private void nextTurn() {
+	private void nextTurn() throws IOException {
 		checkBoard();
 
 		if (current.getRow() <= 0 && current.getCol() <= 0) {

@@ -43,12 +43,10 @@ public class PlayerInfo extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				playerNames = new String[fields.length];
 				for (int i = 0; i < fields.length; i++) {
-					playerNames[i] = fields[i].getText();
+					playerNames[i] = fields[i].getText().toUpperCase();
 				}
 
 				menu.playGame(playerNames);
-
-
 
 			}
 		});
@@ -86,8 +84,7 @@ public class PlayerInfo extends JPanel {
 			f.setPreferredSize(d);
 			f.setMinimumSize(d);
 			f.setMaximumSize(d);
-			// f.setAlignmentX(Component.CENTER_ALIGNMENT);
-			// l.setVerticalAlignment(JLabel.CENTER);
+
 			fields[i - 1] = f;
 			player.add(f);
 			players.add(player);
