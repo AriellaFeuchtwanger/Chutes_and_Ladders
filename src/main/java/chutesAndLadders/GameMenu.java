@@ -1,6 +1,7 @@
 package chutesAndLadders;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -26,6 +27,7 @@ public class GameMenu extends JPanel {
 			ChutesAndLadders game) {
 
 		setLayout(new BorderLayout());
+		setBackground(Color.WHITE);
 
 		playerInfo = pInfo;
 		playerInfo.setGameMenu(this);
@@ -65,7 +67,9 @@ public class GameMenu extends JPanel {
 	public void newGame() {
 		frame.remove(this);
 		Injector injector = Guice.createInjector(new GameModule());
-		frame.add(injector.getInstance(GameMenu.class));
+		GameMenu m = injector.getInstance(GameMenu.class);
+		m.setFrame(frame);
+		frame.add(m);
 		frame.revalidate();
 	}
 

@@ -2,6 +2,7 @@ package chutesAndLadders;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.inject.Inject;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -42,19 +44,70 @@ public class ChutesAndLadders extends JPanel {
 	@Inject
 	public ChutesAndLadders() {
 
-		BorderLayout bLayout = new BorderLayout();
-		setLayout(bLayout);
+		setLayout(new BorderLayout());
 
 		videoPlayer = new VideoPlayer();
 
+
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(4, 0, 7, 7));
+		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 		panel.setBackground(new Color(204, 204, 204));
-		panel.setPreferredSize(new Dimension(230, 400));
+
+
+		JPanel controlPanel = new JPanel();
+		controlPanel.setLayout(new GridLayout(4, 0, 7, 7));
+		controlPanel.setBackground(null);
+		controlPanel.setOpaque(false);
+		controlPanel.setPreferredSize(new Dimension(230, 400));
+
+		JButton newGame = new JButton("MAIN MENU");	
+		newGame.setAlignmentX(Component.CENTER_ALIGNMENT);
+		newGame.addMouseListener(new MouseListener(){
+
+			public void mouseClicked(MouseEvent arg0) {
+
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				JButton b = (JButton) e.getSource();
+				b.setForeground(Color.WHITE);
+			}
+
+			public void mouseExited(MouseEvent e) {
+				JButton b = (JButton) e.getSource();
+				b.setForeground(Color.BLACK);
+
+			}
+
+			public void mousePressed(MouseEvent arg0) {
+
+			}
+
+			public void mouseReleased(MouseEvent arg0) {
+
+			}});
+		Dimension d = new Dimension(100, 50);
+		newGame.setPreferredSize(d);
+		newGame.setMinimumSize(d);
+		newGame.setMaximumSize(d);
+		newGame.setContentAreaFilled(false);
+		newGame.setBorderPainted(false);
+		newGame.setOpaque(false);
+		newGame.setBackground(null);
+		newGame.setFont(new Font("Arial", Font.BOLD, 10));
+		newGame.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				gameMenu.newGame();
+			}
+
+		});
+
+		panel.add(newGame);
 
 		JLabel logo = new JLabel(new ImageIcon(getClass().getResource(
 				"/logo_small.png")));
-		panel.add(logo);
+		controlPanel.add(logo);
 
 		Font font = new Font("Arial", Font.BOLD, 30);
 		board = new Board();
@@ -76,11 +129,11 @@ public class ChutesAndLadders extends JPanel {
 		turn.setVerticalAlignment(JLabel.TOP);
 		playerPanel.add(turn);
 
-		panel.add(playerPanel);
+		controlPanel.add(playerPanel);
 
 		playersImg = new JLabel();
 		playersImg.setHorizontalAlignment(JLabel.CENTER);
-		panel.add(playersImg);
+		controlPanel.add(playersImg);
 
 		spinButton = new JButton();
 
@@ -132,9 +185,10 @@ public class ChutesAndLadders extends JPanel {
 				new ImageIcon(getClass().getResource("/five.png")),
 				new ImageIcon(getClass().getResource("/six.png")) };
 
-		panel.add(spinButton);
+		controlPanel.add(spinButton);
+		panel.add(controlPanel);
 
-		add(panel, BorderLayout.LINE_START);
+		add(panel, BorderLayout.WEST);
 
 		pieces = new ImageIcon[] {
 				new ImageIcon(getClass().getResource("/red.png")),
