@@ -219,7 +219,6 @@ public class ChutesAndLadders extends JPanel {
 	}
 
 	private void displayWinner() {
-		// playSound("sound.wav");
 		int again = JOptionPane.showConfirmDialog(this, "CONGRAGULATIONS! "
 				+ current.getName() + " WINS!!!! \nDo you want to play again?",
 				"Chutes and Ladders", JOptionPane.YES_NO_OPTION,
@@ -313,7 +312,6 @@ public class ChutesAndLadders extends JPanel {
 					try {
 						nextTurn();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}

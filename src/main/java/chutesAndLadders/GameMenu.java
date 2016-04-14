@@ -27,7 +27,7 @@ public class GameMenu extends JPanel {
 			ChutesAndLadders game) {
 
 		setLayout(new BorderLayout());
-		setBackground(Color.WHITE);
+		setBackground(new Color(204, 204, 204));
 
 		playerInfo = pInfo;
 		playerInfo.setGameMenu(this);

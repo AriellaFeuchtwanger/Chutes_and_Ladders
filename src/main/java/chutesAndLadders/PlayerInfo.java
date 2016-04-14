@@ -108,7 +108,6 @@ public class PlayerInfo extends JPanel implements MouseListener {
 			Dimension d = new Dimension(200, 35);
 
 			JTextField f = new JTextField();
-			f.setBackground(Color.LIGHT_GRAY);
 			f.setFont(font);
 			f.setPreferredSize(d);
 			f.setMinimumSize(d);
@@ -130,7 +129,7 @@ public class PlayerInfo extends JPanel implements MouseListener {
 
 	public void mouseEntered(MouseEvent e) {
 		JButton b = (JButton) e.getSource();
-		b.setForeground(Color.LIGHT_GRAY);
+		b.setForeground(Color.WHITE);
 	}
 
 	public void mouseExited(MouseEvent e) {
