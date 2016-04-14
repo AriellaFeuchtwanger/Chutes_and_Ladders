@@ -63,12 +63,10 @@ public class GameMenu extends JPanel {
 	}
 
 	public void newGame() {
-
 		frame.remove(this);
 		Injector injector = Guice.createInjector(new GameModule());
 		frame.add(injector.getInstance(GameMenu.class));
 		frame.revalidate();
-
 	}
 
 	public void setFrame(GameFrame gameFrame) {
