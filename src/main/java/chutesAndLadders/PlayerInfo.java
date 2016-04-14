@@ -26,7 +26,7 @@ public class PlayerInfo extends JPanel {
 
 	@Inject
 	public PlayerInfo() {
-		//setLayout();
+		// setLayout();
 
 		Dimension d = new Dimension(300, 600);
 		setPreferredSize(d);
@@ -58,10 +58,25 @@ public class PlayerInfo extends JPanel {
 		instructions.setMinimumSize(d);
 		instructions.setMaximumSize(d);
 
+		JButton newGame = new JButton("Main Menu");
+		// Dimension d = new Dimension(100, 50);
+		// newGame.setPreferredSize(d);
+		// newGame.setMinimumSize(d);
+		// newGame.setMaximumSize(d);
+		// newGame.setFont(new Font("Arial", Font.PLAIN, 18));
+
+		newGame.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				menu.newGame();
+			}
+
+		});
+
 		add(instructions);
 		add(players);
 		add(submit);
-
+		add(newGame);
 	}
 
 	public void setNumPlayers(int num) {
