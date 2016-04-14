@@ -31,22 +31,6 @@ public class GameFrame extends JFrame {
 		add(this.gameMenu, BorderLayout.CENTER);
 		this.gameMenu.setFrame(this);
 		
-		JButton newGame = new JButton("Main Menu");
-//		Dimension d = new Dimension(100, 50);
-//		newGame.setPreferredSize(d);
-//		newGame.setMinimumSize(d);
-//		newGame.setMaximumSize(d);
-//		newGame.setFont(new Font("Arial", Font.PLAIN, 18));
-		
-		newGame.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent arg0) {
-				gameMenu.newGame();
-			}
-			
-		});
-		
-		add(newGame, BorderLayout.NORTH);
 		setVisible(true);
 	}
 
