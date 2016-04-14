@@ -32,11 +32,11 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 		setInstructions(instructions);
 
 		GameButton two, three, four, five, six;
-		two = new GameButton("2", Color.RED);
-		three = new GameButton("3", Color.BLUE);
-		four = new GameButton("4", Color.ORANGE);
-		five = new GameButton("5", Color.GREEN);
-		six = new GameButton("6", Color.MAGENTA);
+		two = new GameButton("2", new Color(255, 41, 106));
+		three = new GameButton("3", new Color(102, 75, 145));
+		four = new GameButton("4", new Color(252, 238, 33));
+		five = new GameButton("5", new Color(0, 191, 12));
+		six = new GameButton("6", new Color(41, 171, 145));
 
 		two.addActionListener(this);
 		three.addActionListener(this);

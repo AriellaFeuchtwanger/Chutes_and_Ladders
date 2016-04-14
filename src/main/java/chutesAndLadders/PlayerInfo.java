@@ -26,7 +26,7 @@ public class PlayerInfo extends JPanel {
 
 	@Inject
 	public PlayerInfo() {
-		setLayout(new BorderLayout());
+		//setLayout();
 
 		Dimension d = new Dimension(300, 600);
 		setPreferredSize(d);
@@ -34,7 +34,7 @@ public class PlayerInfo extends JPanel {
 		setMaximumSize(d);
 
 		players = new JPanel();
-		players.setLayout(new GridLayout(6, 1));
+		players.setLayout(new GridLayout(0, 1));
 
 		submit = new JButton("PLAY");
 		submit.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -58,9 +58,9 @@ public class PlayerInfo extends JPanel {
 		instructions.setMinimumSize(d);
 		instructions.setMaximumSize(d);
 
-		add(players, BorderLayout.CENTER);
-		add(submit, BorderLayout.SOUTH);
-		add(instructions, BorderLayout.NORTH);
+		add(instructions);
+		add(players);
+		add(submit);
 
 	}
 
