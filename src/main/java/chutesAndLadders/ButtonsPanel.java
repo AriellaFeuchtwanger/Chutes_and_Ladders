@@ -2,15 +2,18 @@ package chutesAndLadders;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.inject.Inject;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class ButtonsPanel extends JPanel implements ActionListener {
 	private GameMenu menu;
@@ -24,38 +27,48 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 		setPreferredSize(d);
 		setMinimumSize(d);
 		setMaximumSize(d);
+		setBackground(null);
+		setOpaque(false);
+
 
 		JPanel buttons = new JPanel();
-		buttons.setLayout(new GridLayout(6, 1));
+		buttons.setBackground(null);
+		buttons.setOpaque(false);
+		buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
 
-		JPanel instructions = new JPanel();
-		setInstructions(instructions);
+		JPanel instructions = setInstructions();
 
-		GameButton two, three, four, five, six;
-		two = new GameButton("2", new Color(255, 41, 106));
-		three = new GameButton("3", new Color(102, 75, 145));
-		four = new GameButton("4", new Color(252, 238, 33));
-		five = new GameButton("5", new Color(0, 191, 12));
-		six = new GameButton("6", new Color(41, 171, 226));
+		JButton[] bs = new JButton[] { 
+				new JButton("2"), 
+				new JButton("3"),
+				new JButton("4"), 
+				new JButton("5"), 
+				new JButton("6") };
 
-		two.addActionListener(this);
-		three.addActionListener(this);
-		four.addActionListener(this);
-		five.addActionListener(this);
-		six.addActionListener(this);
+		bs[0].setBackground(new Color(255, 41, 106));
+		bs[1].setBackground(new Color(102, 75, 145));
+		bs[2].setBackground(new Color(252, 238, 33));
+		bs[3].setBackground( new Color(0, 191, 12));
+		bs[4].setBackground(new Color(41, 171, 226));
 
-		buttons.add(two);
-		buttons.add(three);
-		buttons.add(four);
-		buttons.add(five);
-		buttons.add(six);
+		Dimension dim = new Dimension(150, 75);
+		for (JButton b : bs) {
+			b.addActionListener(this);
+			b.setAlignmentX(Component.CENTER_ALIGNMENT);			
+			b.setPreferredSize(dim);
+			b.setMinimumSize(dim);
+			b.setMaximumSize(dim);
+			b.setFont(new Font("Arial", Font.BOLD, 33));
+
+			buttons.add(b);
+		}
 
 		add(instructions, BorderLayout.NORTH);
 		add(buttons, BorderLayout.CENTER);
 	}
 
-	private void setInstructions(JPanel instructions) {
-		Dimension d;
+	private JPanel setInstructions() {
+		Dimension d = new Dimension(300, 130);
 		JLabel line1 = new JLabel("SELECT HOW MANY", JLabel.CENTER);
 		line1.setFont(new Font("Arial", Font.BOLD, 20));
 		JLabel line2 = new JLabel("PLAYERS WOULD", JLabel.CENTER);
@@ -63,20 +76,24 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 		JLabel line3 = new JLabel("LIKE TO PLAY", JLabel.CENTER);
 		line3.setFont(new Font("Arial", Font.BOLD, 20));
 
-		d = new Dimension(300, 100);
+		JPanel instructions = new JPanel();
+		instructions.setBorder(new EmptyBorder(20, 0, 0, 0));
 		instructions.setPreferredSize(d);
 		instructions.setMinimumSize(d);
 		instructions.setMaximumSize(d);
+		instructions.setBackground(null);
+		instructions.setOpaque(false);
 
 		instructions.add(line1);
 		instructions.add(line2);
 		instructions.add(line3);
+
+		return instructions;
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		GameButton g = (GameButton) event.getSource();
+		JButton g = (JButton) event.getSource();
 		numPlayers = Integer.parseInt(g.getText());
-		setButtonClicked(true);
 		menu.setPlayers(numPlayers);
 	}
 
